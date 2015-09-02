@@ -1,12 +1,15 @@
 /*
  * grunt-speck
- * 
+ * https://github.com/speckjs/speckjs/
  *
- * Copyright (c) 2015 Nick Balestra
+ * Copyright (c) 2015 Nick Balestra, Luke Savage, Zach Sebag, Greg Varias
  * Licensed under the MIT license.
  */
 
 'use strict';
+
+// TODO: require speck
+// var speck = require('speck');
 
 module.exports = function(grunt) {
 
@@ -16,8 +19,7 @@ module.exports = function(grunt) {
   grunt.registerMultiTask('speck', 'Tiny specs, great tests', function() {
     // Merge task-specific and/or target-specific options with these defaults.
     var options = this.options({
-      punctuation: '.',
-      separator: ', '
+
     });
 
     // Iterate over all specified file groups.
