@@ -1,24 +1,22 @@
 {
-  "name": "grunt-speck",
-  "description": "Tiny specs, great tests",
-  "version": "0.1.0",
-  "homepage": "",
-  "author": {
-    "name": "Nick Balestra, Luke Savage, Zach Sebag, Greg Varias"
-  },
+  "name": "grunt-speckjs",
+  "description": "tiny comments, great tests",
+  "version": "0.0.1",
+  "homepage": "https://speckjs.github.io",
+  "license": "MIT",
+  "contributors": [
+    "Luke Savage <luke.savage92@gmail.com>",
+    "Zach Sebag <zsebag@gmail.com>",
+    "Greg Varias <gregvarias@gmail.com>",
+    "Nick Balestra <nick@balestra.ch>"
+  ],
   "repository": {
     "type": "git",
-    "url": "https://github.com/speckjs/speck"
+    "url": "https://github.com/speckjs/grunt-speckjs"
   },
   "bugs": {
-    "url": ""
+    "url": "https://github.com/speckjs/grunt-speckjs/issues"
   },
-  "licenses": [
-    {
-      "type": "MIT",
-      "url": "/blob/master/LICENSE-MIT"
-    }
-  ],
   "engines": {
     "node": "(>= 0.10.0)"
   },

@@ -33,7 +33,8 @@ module.exports = function(grunt) {
       custom_options: {
         options: {
           testFW: 'tape',
-          specName: '--testSpec'
+          specName: '--testSpec',
+          logs: false
         },
         files: {
           'srcSpecs/': ['test/fixtures/**/*.js']
