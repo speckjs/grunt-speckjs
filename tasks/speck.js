@@ -29,6 +29,7 @@ module.exports = function(grunt) {
     var dest = this.files[0].dest;
 
     if (!grunt.file.exists(dest)) {
+      grunt.log.subhead('Process terminated');
       grunt.log.warn('"' + dest + '" No such directory.');
     } else {
 
@@ -36,6 +37,7 @@ module.exports = function(grunt) {
       files.forEach(function(filepath) {
 
         if (!grunt.file.exists(filepath)) {
+            grunt.log.subhead('Process terminated');
             grunt.log.warn('"' + filepath + '" No such file.');
         } else {
           var file = {
