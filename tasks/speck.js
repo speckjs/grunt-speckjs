@@ -8,8 +8,7 @@
 
 'use strict';
 
-// TODO: require speck
-// var speck = require('speck');
+var speck = require('speckjs');
 
 module.exports = function(grunt) {
 
@@ -17,36 +16,44 @@ module.exports = function(grunt) {
   // creation: http://gruntjs.com/creating-tasks
 
   grunt.registerMultiTask('speck', 'Tiny specs, great tests', function() {
+
     // Merge task-specific and/or target-specific options with these defaults.
     var options = this.options({
-
+      testFW: 'tape',
+      specName: '--testSpec'
     });
 
-    // Iterate over all specified file groups.
-    this.files.forEach(function(f) {
-      // Concat specified files.
-      var src = f.src.filter(function(filepath) {
-        // Warn on and remove invalid source files (if nonull was set).
+    var files = this.filesSrc;
+    var fs = this.files;
+    var errorCount = 0;
+    var dest = this.files[0].dest;
+
+    if (!grunt.file.exists(dest)) {
+      grunt.log.warn('"' + dest + '" No such directory.');
+    } else {
+
+      // Iterate over all specified file groups.
+      files.forEach(function(filepath) {
+
         if (!grunt.file.exists(filepath)) {
-          grunt.log.warn('Source file "' + filepath + '" not found.');
-          return false;
+            grunt.log.warn('"' + filepath + '" No such file.');
         } else {
-          return true;
+          var file = {
+            name: filepath,
+            content: grunt.file.read(filepath)
+          };
+
+          var build = speck.build(file, options);
+
+          var theFile = filepath.match(/\/([^/]*)$/)[1];
+          var onlyName = theFile.substr(0, theFile.lastIndexOf('.')) || theFile;
+
+          var buildPath = dest + onlyName + options.specName + '.js';
+
+          grunt.file.write(buildPath, build);
+          grunt.log.oklns('Specfile Compiled in "' + buildPath + '"');
         }
-      }).map(function(filepath) {
-        // Read file source.
-        return grunt.file.read(filepath);
-      }).join(grunt.util.normalizelf(options.separator));
-
-      // Handle options.
-      src += options.punctuation;
-
-      // Write the destination file.
-      grunt.file.write(f.dest, src);
-
-      // Print a success message.
-      grunt.log.writeln('File "' + f.dest + '" created.');
-    });
+      });
+    }
   });
-
 };
