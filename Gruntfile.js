@@ -1,6 +1,6 @@
 /*
  * grunt-speck
- * 
+ *
  *
  * Copyright (c) 2015 Nick Balestra
  * Licensed under the MIT license.
@@ -30,20 +30,13 @@ module.exports = function(grunt) {
 
     // Configuration to be run (and then tested).
     speck: {
-      default_options: {
-        options: {
-        },
-        files: {
-          'tmp/default_options': ['test/fixtures/testing', 'test/fixtures/123']
-        }
-      },
       custom_options: {
         options: {
-          separator: ': ',
-          punctuation: ' !!!'
+          testFW: 'tape',
+          specName: '--testSpec'
         },
         files: {
-          'tmp/custom_options': ['test/fixtures/testing', 'test/fixtures/123']
+          'srcSpecs/': ['test/fixtures/**/*.js']
         }
       }
     },
