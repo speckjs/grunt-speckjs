@@ -33,7 +33,7 @@ module.exports = function(grunt) {
       // Iterate over all specified file groups.
       files.forEach(function(filepath) {
         var file = {
-          name: filepath,
+          name: path.relative(dest, filepath),
           content: grunt.file.read(filepath)
         };
 
