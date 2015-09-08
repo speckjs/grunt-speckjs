@@ -30,11 +30,11 @@ module.exports = function(grunt) {
 
     // Configuration to be run (and then tested).
     speck: {
-      custom_options: {
+      build: {
         options: {
           testFW: 'tape',
           specName: '--testSpec',
-          logs: false
+          logs: true
         },
         files: {
           'srcSpecs/': ['test/fixtures/**/*.js']
