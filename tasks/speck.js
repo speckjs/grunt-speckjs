@@ -23,7 +23,8 @@ module.exports = function(grunt) {
     });
     var files = this.filesSrc;
     var dest = this.files[0].dest;
-
+    dest = Array.isArray(dest) ? dest.join('') : dest;
+    
     if (options.logs) grunt.log.subhead('SpeckJS:');
 
     if (!grunt.file.exists(dest)) {
