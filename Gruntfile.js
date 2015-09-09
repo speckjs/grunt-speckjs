@@ -32,7 +32,7 @@ module.exports = function(grunt) {
     speck: {
       build: {
         options: {
-          testFW: 'jasmine',
+          testFW: 'tape',
           specName: '--testSpec',
           logs: true
         },
