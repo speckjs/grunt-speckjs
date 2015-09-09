@@ -8,45 +8,43 @@
 
 'use strict';
 
-// TODO: require speck
-// var speck = require('speck');
+var path = require('path');
+var speck = require('speckjs');
 
 module.exports = function(grunt) {
 
-  // Please see the Grunt documentation for more information regarding task
-  // creation: http://gruntjs.com/creating-tasks
-
   grunt.registerMultiTask('speck', 'Tiny specs, great tests', function() {
+
     // Merge task-specific and/or target-specific options with these defaults.
     var options = this.options({
-
+      testFW: 'tape',
+      specName: '--testSpec',
+      logs: true
     });
+    var files = this.filesSrc;
+    var dest = this.files[0].dest;
+    dest = Array.isArray(dest) ? dest.join('') : dest;
+    
+    if (options.logs) grunt.log.subhead('SpeckJS:');
 
-    // Iterate over all specified file groups.
-    this.files.forEach(function(f) {
-      // Concat specified files.
-      var src = f.src.filter(function(filepath) {
-        // Warn on and remove invalid source files (if nonull was set).
-        if (!grunt.file.exists(filepath)) {
-          grunt.log.warn('Source file "' + filepath + '" not found.');
-          return false;
-        } else {
-          return true;
-        }
-      }).map(function(filepath) {
-        // Read file source.
-        return grunt.file.read(filepath);
-      }).join(grunt.util.normalizelf(options.separator));
+    if (!grunt.file.exists(dest)) {
+      if (options.logs) grunt.log.error('"' + dest + '" No such directory.');
+    } else {
 
-      // Handle options.
-      src += options.punctuation;
+      // Iterate over all specified file groups.
+      files.forEach(function(filepath) {
+        var file = {
+          name: path.relative(dest, filepath),
+          content: grunt.file.read(filepath)
+        };
 
-      // Write the destination file.
-      grunt.file.write(f.dest, src);
+        var build = speck.build(file, options);
+        var fileName = path.parse(filepath).name;
+        var buildPath = dest + fileName + options.specName + '.js';
 
-      // Print a success message.
-      grunt.log.writeln('File "' + f.dest + '" created.');
-    });
+        grunt.file.write(buildPath, build);
+        if (options.logs) grunt.log.oklns('Specfile Compiled in "' + buildPath + '"');
+      });
+    }
   });
-
 };

@@ -1,6 +1,6 @@
 /*
  * grunt-speck
- * 
+ *
  *
  * Copyright (c) 2015 Nick Balestra
  * Licensed under the MIT license.
@@ -30,20 +30,14 @@ module.exports = function(grunt) {
 
     // Configuration to be run (and then tested).
     speck: {
-      default_options: {
+      build: {
         options: {
+          testFW: 'tape',
+          specName: '--testSpec',
+          logs: true
         },
         files: {
-          'tmp/default_options': ['test/fixtures/testing', 'test/fixtures/123']
-        }
-      },
-      custom_options: {
-        options: {
-          separator: ': ',
-          punctuation: ' !!!'
-        },
-        files: {
-          'tmp/custom_options': ['test/fixtures/testing', 'test/fixtures/123']
+          'srcSpecs/': ['test/fixtures/**/*.js']
         }
       }
     },
@@ -51,6 +45,24 @@ module.exports = function(grunt) {
     // Unit tests.
     nodeunit: {
       tests: ['test/*_test.js']
+    },
+
+    tape: {
+      options: {
+        pretty: true,
+        output: 'console'
+      },
+      files: ['srcSpecs/**/*.js']
+    },
+
+    watch: {
+      scripts: {
+        files: ['test/fixtures/**/*.js'],
+        tasks: ['speck', 'tape'],
+        options: {
+          spawn: false,
+        },
+      },
     }
 
   });
@@ -62,6 +74,9 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-jshint');
   grunt.loadNpmTasks('grunt-contrib-clean');
   grunt.loadNpmTasks('grunt-contrib-nodeunit');
+
+  grunt.loadNpmTasks('grunt-contrib-watch');
+  grunt.loadNpmTasks('grunt-tape');
 
   // Whenever the "test" task is run, first clean the "tmp" dir, then run this
   // plugin's task(s), then test the result.
