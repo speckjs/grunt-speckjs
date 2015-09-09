@@ -42,6 +42,6 @@
     "unit tests"
   ],
   "dependencies": {
-    "speckjs": "0.0.3"
+    "speckjs": "0.0.4"
   }
 }
