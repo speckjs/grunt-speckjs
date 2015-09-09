@@ -28,7 +28,7 @@
     "grunt-contrib-clean": "^0.5.0",
     "grunt-contrib-jshint": "^0.9.2",
     "grunt-contrib-nodeunit": "^0.3.3",
-    "performance-now": "^0.2.0"
+    "performance-now": "^0.2.0",
   },
   "peerDependencies": {
     "grunt": "~0.4.5"
@@ -42,6 +42,6 @@
     "unit tests"
   ],
   "dependencies": {
-    "speckjs": "0.0.3"
+    "speckjs": "0.0.4"
   }
 }
