@@ -22,13 +22,19 @@ module.exports = function(grunt) {
       logs: true
     });
     var files = this.filesSrc;
+
+    // Support both single and multitask configuration
     var dest = this.files[0].dest;
     dest = Array.isArray(dest) ? dest.join('') : dest;
-    
-    if (options.logs) grunt.log.subhead('SpeckJS:');
+
+    if (options.logs) {
+      grunt.log.subhead('SpeckJS:');
+    }
 
     if (!grunt.file.exists(dest)) {
-      if (options.logs) grunt.log.error('"' + dest + '" No such directory.');
+      if (options.logs) {
+        grunt.log.error('"' + dest + '" No such directory.');
+      }
     } else {
 
       // Iterate over all specified file groups.
@@ -43,7 +49,9 @@ module.exports = function(grunt) {
         var buildPath = dest + fileName + options.specName + '.js';
 
         grunt.file.write(buildPath, build);
-        if (options.logs) grunt.log.oklns('Specfile Compiled in "' + buildPath + '"');
+        if (options.logs) {
+          grunt.log.oklns('Specfile Compiled in "' + buildPath + '"');
+        }
       });
     }
   });

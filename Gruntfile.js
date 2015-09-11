@@ -12,77 +12,66 @@ module.exports = function(grunt) {
 
   // Project configuration.
   grunt.initConfig({
-    jshint: {
-      all: [
+    eslint: {
+      src: [
         'Gruntfile.js',
         'tasks/*.js',
-        '<%= nodeunit.tests %>'
-      ],
-      options: {
-        jshintrc: '.jshintrc'
-      }
+        '<%= tape.files %>'
+      ]
     },
 
     // Before generating any new files, remove any previously-created files.
     clean: {
-      tests: ['tmp']
+      tests: ['test/fixtures/specs/**/*.js']
     },
 
     // Configuration to be run (and then tested).
     speck: {
-      build: {
+      tape: {
         options: {
           testFW: 'tape',
-          specName: '--testSpec',
+          specName: '_tapeSpec',
           logs: true
         },
         files: {
-          'srcSpecs/': ['test/fixtures/**/*.js']
+          'test/fixtures/specs/': ['test/fixtures/*.js']
+        }
+      },
+      jasmine: {
+        options: {
+          testFW: 'jasmine',
+          specName: '_jasmineSpec',
+          logs: true
+        },
+        files: {
+          'test/fixtures/specs/': ['test/fixtures/*.js']
         }
       }
     },
 
     // Unit tests.
-    nodeunit: {
-      tests: ['test/*_test.js']
-    },
-
     tape: {
       options: {
         pretty: true,
         output: 'console'
       },
-      files: ['srcSpecs/**/*.js']
-    },
-
-    watch: {
-      scripts: {
-        files: ['test/fixtures/**/*.js'],
-        tasks: ['speck', 'tape'],
-        options: {
-          spawn: false,
-        },
-      },
+      files: ['test/specs/*_test.js']
     }
-
   });
 
   // Actually load this plugin's task(s).
   grunt.loadTasks('tasks');
 
   // These plugins provide necessary tasks.
-  grunt.loadNpmTasks('grunt-contrib-jshint');
+  grunt.loadNpmTasks('gruntify-eslint');
   grunt.loadNpmTasks('grunt-contrib-clean');
-  grunt.loadNpmTasks('grunt-contrib-nodeunit');
-
-  // grunt.loadNpmTasks('grunt-contrib-watch');
-  // grunt.loadNpmTasks('grunt-tape');
+  grunt.loadNpmTasks('grunt-tape');
 
   // Whenever the "test" task is run, first clean the "tmp" dir, then run this
   // plugin's task(s), then test the result.
-  grunt.registerTask('test', ['clean', 'speck', 'nodeunit']);
+  grunt.registerTask('test', ['clean', 'speck', 'tape']);
 
   // By default, lint and run all tests.
-  grunt.registerTask('default', ['jshint', 'test']);
+  grunt.registerTask('default', ['eslint', 'test']);
 
 };
