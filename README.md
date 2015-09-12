@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/speckjs/grunt-speckjs.svg?branch=master)](https://travis-ci.org/speckjs/grunt-speckjs)
+
 # grunt-speck
 
 > Tiny specs, great tests
