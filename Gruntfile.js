@@ -46,6 +46,16 @@ module.exports = function(grunt) {
         files: {
           'test/fixtures/specs/': ['test/fixtures/*.js']
         }
+      },
+      mochaChai: {
+        options: {
+          testFW: 'mocha-chai',
+          specName: '_mochaChaiSpec',
+          logs: true
+        },
+        files: {
+          'test/fixtures/specs/': ['test/fixtures/*.js']
+        }
       }
     },
 
