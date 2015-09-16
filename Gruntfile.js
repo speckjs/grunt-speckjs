@@ -67,11 +67,7 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-clean');
   grunt.loadNpmTasks('grunt-tape');
 
-  // Whenever the "test" task is run, first clean the "tmp" dir, then run this
-  // plugin's task(s), then test the result.
-  grunt.registerTask('test', ['clean', 'speck', 'tape']);
-
-  // By default, lint and run all tests.
-  grunt.registerTask('default', ['eslint', 'test']);
+  grunt.registerTask('build', ['clean', 'speck', 'tape']);
+  grunt.registerTask('test', ['eslint', 'build']);
 
 };
