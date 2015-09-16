@@ -1,8 +1,7 @@
 [![Build Status](https://travis-ci.org/speckjs/grunt-speckjs.svg?branch=master)](https://travis-ci.org/speckjs/grunt-speckjs)
 
-# grunt-speck
-
-> Tiny specs, great tests
+# grunt-speckjs
+Comment Driven Development
 
 ## Getting Started
 This plugin requires Grunt `~0.4.5`
